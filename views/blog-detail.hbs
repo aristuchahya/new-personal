@@ -1,0 +1,116 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Detail</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-white shadow">
+      <div class="container-fluid mt-2">
+        <a class="navbar-brand mx-2" href="#">
+          <img src="../assets/img/logo.png" alt="Bootstrap" width="50" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3 d-flex gap-3">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="project">Add Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testimonials">Testimonials</a>
+            </li>
+          </ul>
+          <a
+            class="btn btn-primary bg-black rounded-pill border-0 p-2 px-3 fw-normal text-decoration-none"
+            href="contact"
+          >Contact Me</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column align-items-center mt-5">
+
+      <p hidden>{{data.id}}</p>
+      <h1 class="fw-bold mb-5">{{data.project}}</h1>
+      <div class="d-flex gap-5">
+        <div class="" style="width: 500px">
+          <img
+            src="../uploads/{{data.image}}"
+            alt=""
+            class="rounded ms-5"
+            style="width: 80%"
+          />
+          <p class="card-text ms-5 mt-3">
+            {{data.description}}
+          </p>
+        </div>
+
+        <div class="d-flex flex-column">
+          <div>
+            <h3>Duration</h3>
+            <p>
+              <i class="fa-solid fa-calendar-days me-2"></i>{{data.start}}
+              -
+              {{data.end}}
+            </p>
+            <p><i class="fa-regular fa-clock me-2"></i>{{data.duration}}</p>
+          </div>
+
+          <div class="mt-5">
+            <h3>Technologies</h3>
+            <ul class="list-group d-flex flex-row gap-3">
+              {{#each data.technology}}
+                <div class="d-flex flex-column gap-3">
+                  <li class="list-group-item ps-0" style="font-size: 20px;">
+                    <i class="fa-brands fa-{{this}} me-2"></i>{{this}}
+                  </li>
+                </div>
+              {{/each}}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+      integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>

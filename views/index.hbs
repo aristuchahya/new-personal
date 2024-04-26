@@ -1,0 +1,187 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-white shadow">
+      <div class="container-fluid my-2">
+        <a class="navbar-brand mx-2" href="#">
+          <img src="../assets/img/logo.png" alt="Bootstrap" width="50" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3 d-flex gap-3">
+            <li class="nav-item">
+              <a
+                class="nav-link active fw-bold"
+                aria-current="page"
+                href="/"
+              >Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="project">Add Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testimonials">Testimonials</a>
+            </li>
+          </ul>
+
+          <a
+            class="btn btn-primary bg-black rounded-pill border-0 p-2 px-3 fw-normal text-decoration-none"
+            href="contact"
+          >Contact Me</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex flex-column align-items-center w-100">
+      <div class="card mb-3 mt-3 d-flex flex-row w-75 shadow">
+        <div class="card-body ms-4 mt-3 w-50">
+          <h2 class="card-title fw-bold mb-4">Hi! Welcome to My Profile</h2>
+          <p class="card-text" style="text-align: justify">
+            Sebagai seorang FullStack Developer, saya bertanggung jawab untuk
+            mengembangkan aplikasi web dan mobile dari awal hingga akhir. Ini
+            berarti saya terlibat dalam semua tahap pengembangan, mulai dari
+            perencanaan dan desain hingga implementasi dan pemeliharaan. Sebagai
+            bagian dari peran ini, saya harus memiliki pemahaman yang kuat
+            tentang front-end dan back-end development. Di bagian depan, saya
+            akan bekerja dengan teknologi seperti HTML, CSS, dan JavaScript
+            serta kerangka kerja seperti React.js untuk menciptakan antarmuka
+            pengguna yang menarik dan responsif. Di sisi belakang, saya akan
+            menggunakan bahasa pemrograman seperti JavaScript (Node.js), Python
+            (Django), atau PHP serta database seperti MongoDB, MySQL, atau
+            PostgreSQL untuk mengembangkan logika aplikasi, mengelola data, dan
+            memastikan fungsionalitas yang tepat.
+          </p>
+          <div>
+            <a
+              href=""
+              class="btn btn-primary bg-black rounded-pill border-0 px-4"
+            >Contact</a>
+            <a
+              href="https://drive.google.com/file/d/1LLfejro-T-W9EPKdwP3L1n9Ro1phdYQc/view?usp=sharing"
+              class="btn btn-primary bg-white text-black fw-medium border-0 ms-2"
+            >Download CV <i class="fa-regular fa-circle-down"></i></a>
+          </div>
+
+          <div class="d-flex gap-5 mt-4 ms-2 fs-2">
+            <a href="https://www.linkedin.com/in/aristu-chahya-8277b4231/"><i
+                class="fa-brands fa-linkedin text-black"
+              ></i></a>
+            <a
+              href="https://www.instagram.com/arizu_chaaa?igsh=MTN4djVqaW80eDRoYg=="
+            ><i class="fa-brands fa-instagram text-black"></i></a>
+            <a
+              href="https://x.com/ChahyaAristu?t=M3K-DDkKG0SyRvgCVsF7GQ&s=09"
+            ><i class="fa-brands fa-twitter text-black"></i></a>
+            <a href="https://www.facebook.com/aristu.cool?mibextid=ZbWKwL"><i
+                class="fa-brands fa-facebook text-black"
+              ></i></a>
+          </div>
+        </div>
+        <div class="card w-25 mt-5 mb-5 me-4">
+          <img src="../assets/img/risu.jpg" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title fw-bold text-center">Aristu Chahya</h5>
+            <p class="card-text text-center">FullStack Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-center mt-5">
+      <h1 class="fw-bold mb-4">My Project</h1>
+
+      <div class="d-flex flex-row flex-wrap gap-4">
+        {{#each data}}
+
+          <div class="card shadow" style="width: 350px">
+
+            <img
+              src="../uploads/{{image}}"
+              class="card-img-top p-3"
+              alt="..."
+              style="border-radius: 25px"
+            />
+            <div class="card-body">
+              <h5 class="card-title mb-2">{{project}}</h5>
+              <p class="card-text fw-light">{{duration}}</p>
+              <p class="card-text">
+                {{description}}
+              </p>
+              <p class="card-text text-end"><a
+                  href="/{{id}}"
+                  class="text-decoration-none"
+                >Read More</a></p>
+
+              <div class="d-flex gap-4 fs-3">
+                <i class="fa-brands fa-google-play"></i>
+                <i class="fa-brands fa-android"></i>
+                <i class="fa-brands fa-java"></i>
+              </div>
+
+              <div class="d-flex mt-4 gap-5">
+                <div>
+                  <a
+                    href="/edit-project/{{id}}"
+                    class="btn btn-primary rounded-4"
+                    style="background-color:#111727; padding:5px 50px; border:none"
+                  >Edit</a>
+
+                </div>
+                <form onSubmit="deletePost({{@index}})">
+                  <button
+                    type="submit"
+                    class="btn btn-primary rounded-4"
+                    style="background-color: #111727; border: none; padding: 5px 40px"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+      integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../assets/js/project.js"></script>
+  </body>
+</html>
