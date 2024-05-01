@@ -4,7 +4,6 @@ const { Sequelize, QueryTypes, where } = require("sequelize");
 const sequelize = new Sequelize(config.development);
 const bcrypt = require("bcrypt");
 
-// const data = [];
 const { Project } = require("../models");
 const { User } = require("../models");
 

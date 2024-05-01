@@ -4,7 +4,6 @@ const port = 5000;
 const path = require("path");
 
 const router = require("./routes/index");
-const flash = require("express-flash");
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./views"));

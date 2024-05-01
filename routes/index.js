@@ -39,7 +39,7 @@ router.use(
 router.use(flash());
 
 //route navbar
-// router.get("/", home);
+
 router.get("/register", registerView);
 router.get("/login", loginView);
 router.get("/project", project);
@@ -47,8 +47,7 @@ router.get("/contact", contact);
 router.get("/testimonials", testimonials);
 
 //route CRUD project
-// const upload = multer({ dest: "uploads/" });
-// router.post("/", upload.single("image"), addProject);
+
 router.get("/", allProject);
 router.get("/detail/:id", findProject);
 router.post("/", addProject);
@@ -58,10 +57,5 @@ router.get("/edit/:id", editView);
 router.post("/regist", register);
 router.post("/login", login);
 router.post("/logout", logout);
-
-// router.get("/:id", projectById);
-// router.delete("/project/:id", deleteBlog);
-// router.post("/edit-project/:id", editProject);
-// router.get("/edit-project/:id", editBlogView);
 
 module.exports = router;
