@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "210909",
-    "database": "Project_Dumbways",
+    "database": "project_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

@@ -44,14 +44,37 @@
                 href="/"
               >Home</a>
             </li>
+            {{#if isLogin}}
+              <li class="nav-item">
+                <a class="nav-link" href="/project">Add Project</a>
+              </li>
+            {{/if}}
             <li class="nav-item">
-              <a class="nav-link" href="project">Add Project</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="testimonials">Testimonials</a>
+              <a class="nav-link" href="/testimonials">Testimonials</a>
             </li>
           </ul>
 
+          {{#unless isLogin}}
+            <ul class="navbar-nav me-3 ms-3">
+
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            </ul>
+          {{/unless}}
+
+          {{#if isLogin}}
+
+            <form action="/logout" method="POST">
+              <button
+                class="nav-item nav-link mt-3 me-3"
+                type="submit"
+              >Logout</button>
+            </form>
+          {{/if}}
           <a
             class="btn btn-primary bg-black rounded-pill border-0 p-2 px-3 fw-normal text-decoration-none"
             href="contact"
@@ -59,6 +82,17 @@
         </div>
       </div>
     </nav>
+    {{#if messages.success}}
+      <div
+        class="alert alert-success w-25 m-auto"
+        role="alert"
+        style="text-align: center;"
+      >
+
+        <i class="fa-solid fa-check"></i>
+        {{messages.success}}
+      </div>
+    {{/if}}
 
     <div class="d-flex flex-column align-items-center w-100">
       <div class="card mb-3 mt-3 d-flex flex-row w-75 shadow">
@@ -119,16 +153,17 @@
       <h1 class="fw-bold mb-4">My Project</h1>
 
       <div class="d-flex flex-row flex-wrap gap-4">
-        {{#each data}}
 
+        {{#each projects}}
           <div class="card shadow" style="width: 350px">
 
             <img
-              src="../uploads/{{image}}"
+              src="{{image}}"
               class="card-img-top p-3"
               alt="..."
-              style="border-radius: 25px"
+              style="border-radius: 25px; width: 100%; "
             />
+
             <div class="card-body">
               <h5 class="card-title mb-2">{{title}}</h5>
               <p class="card-text fw-light">{{duration}}</p>
@@ -136,7 +171,7 @@
                 {{description}}
               </p>
               <p class="card-text text-end"><a
-                  href="/{{id}}"
+                  href="/detail/{{id}}"
                   class="text-decoration-none"
                 >Read More</a></p>
 
@@ -146,16 +181,17 @@
                 <i class="fa-brands fa-java"></i>
               </div>
 
+              {{!-- {{#unless isLogin}} --}}
               <div class="d-flex mt-4 gap-5">
                 <div>
                   <a
-                    href="/edit-project/{{id}}"
+                    href="/edit/{{id}}"
                     class="btn btn-primary rounded-4"
                     style="background-color:#111727; padding:5px 50px; border:none"
                   >Edit</a>
-
                 </div>
-                <form onSubmit="deletePost({{@index}})">
+
+                <form method="post" action="/delete/{{id}}">
                   <button
                     type="submit"
                     class="btn btn-primary rounded-4"
@@ -165,6 +201,8 @@
                   </button>
                 </form>
               </div>
+
+              {{!-- {{/unless}} --}}
             </div>
           </div>
         {{/each}}

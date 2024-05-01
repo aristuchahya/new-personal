@@ -48,6 +48,15 @@
               <a class="nav-link" href="testimonials">Testimonials</a>
             </li>
           </ul>
+
+          <ul class="navbar-nav me-3 ms-3">
+            <li class="nav-item">
+              <a class="nav-link" href="register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login">Login</a>
+            </li>
+          </ul>
           <a
             class="btn btn-primary bg-black rounded-pill border-0 p-2 px-3 fw-normal text-decoration-none"
             href="contact"
@@ -58,7 +67,7 @@
 
     <div class="d-flex flex-column mx-auto mt-5" style="width: 500px">
       <h1 class="fw-bold mb-4 mx-auto">Add Project</h1>
-      <form method="post" action="/" enctype="multipart/form-data">
+      <form method="post" action="/">
         <div class="mb-3">
           <label for="" class="form-label fw-semibold">Project Name</label>
           <input type="text" class="form-control" id="" name="title" />
@@ -67,11 +76,11 @@
         <div class="d-flex">
           <div class="mb-3">
             <label for="" class="form-label fw-semibold">Start Date</label>
-            <input type="date" class="form-control" id="" name="start" />
+            <input type="date" class="form-control" id="" name="startDate" />
           </div>
           <div class="mb-3 ms-auto">
             <label for="" class="form-label fw-semibold">End Date</label>
-            <input type="date" class="form-control" id="" name="end" />
+            <input type="date" class="form-control" id="" name="endDate" />
           </div>
         </div>
         <div class="mb-3">
@@ -98,7 +107,7 @@
                 type="checkbox"
                 value="node"
                 id="checkbox1"
-                name="technology[]"
+                name="technology"
               />
               <label class="form-check-label" for="flexCheckDefault">
                 Node JS
@@ -110,7 +119,7 @@
                 type="checkbox"
                 value="laravel"
                 id="checkbox2"
-                name="technology[]"
+                name="technology"
               />
               <label class="form-check-label" for=""> Laravel </label>
             </div>
@@ -123,7 +132,7 @@
                 type="checkbox"
                 value="react"
                 id="checkbox3"
-                name="technology[]"
+                name="technology"
               />
               <label class="form-check-label" for="flexCheckDefault">
                 React JS
@@ -135,7 +144,7 @@
                 type="checkbox"
                 value="angular"
                 id="checkbox4"
-                name="technology[]"
+                name="technology"
               />
               <label class="form-check-label" for=""> Angular </label>
             </div>

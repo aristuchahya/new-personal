@@ -3,3 +3,9 @@ async function deletePost(index) {
     method: "DELETE",
   });
 }
+
+async function editPost(id) {
+  const response = await fetch(`http://localhost:5000/edit/${id}`, {
+    method: "PUT",
+  });
+}
