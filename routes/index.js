@@ -4,7 +4,8 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 const session = require("express-session");
 const flash = require("express-flash");
-// const multer = require("multer");
+const upload = require("../middleware/uploadFile");
+
 const {
   project,
   contact,
@@ -21,6 +22,7 @@ const {
   register,
   login,
   logout,
+  findUserProject,
 } = require("../controller/projectController");
 
 router.use(
@@ -49,10 +51,11 @@ router.get("/testimonials", testimonials);
 //route CRUD project
 
 router.get("/", allProject);
+
 router.get("/detail/:id", findProject);
-router.post("/", addProject);
+router.post("/", upload.single("image"), addProject);
 router.post("/delete/:id", deleteProject);
-router.post("/edit", updateProject);
+router.post("/edit", upload.single("image"), updateProject);
 router.get("/edit/:id", editView);
 router.post("/regist", register);
 router.post("/login", login);

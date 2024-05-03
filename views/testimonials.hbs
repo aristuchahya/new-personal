@@ -41,21 +41,35 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
+            {{#if isLogin}}
             <li class="nav-item">
-              <a class="nav-link" href="project">Add Project</a>
+              <a class="nav-link" href="/project">Add Project</a>
             </li>
+            {{/if}}
             <li class="nav-item">
-              <a class="nav-link active fw-bold" href="testimonials">Testimonials</a>
+              <a class="nav-link active fw-bold" href="/testimonials">Testimonials</a>
             </li>
           </ul>
+          {{#unless isLogin}}
            <ul class="navbar-nav me-3 ms-3">
             <li class="nav-item">
-              <a class="nav-link " href="register">Register</a>
+              <a class="nav-link " href="/register">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login">Login</a>
+              <a class="nav-link" href="/login">Login</a>
             </li>
           </ul>
+          {{/unless}}
+
+           {{#if isLogin}}
+
+            <form action="/logout" method="POST">
+              <button
+                class="nav-item nav-link mt-1 me-3"
+                type="submit"
+              >Logout</button>
+            </form>
+          {{/if}}
           <a
             class="btn btn-primary bg-black rounded-pill border-0 p-2 px-3 fw-normal text-decoration-none"
             href="contact"

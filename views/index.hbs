@@ -94,9 +94,10 @@
       </div>
     {{/if}}
 
-    <div class="d-flex flex-column align-items-center w-100">
-      <div class="card mb-3 mt-3 d-flex flex-row w-75 shadow">
-        <div class="card-body ms-4 mt-3 w-50">
+    <div class="container">
+    <div class="row d-flex flex-column align-items-center w-100 ">
+      <div class="card mb-3 mt-3 d-flex flex-row w-75 shadow col-lg-4 col-md-6">
+        <div class="card-body ms-4 mt-3 w-50 ">
           <h2 class="card-title fw-bold mb-4">Hi! Welcome to My Profile</h2>
           <p class="card-text" style="text-align: justify">
             Sebagai seorang FullStack Developer, saya bertanggung jawab untuk
@@ -139,7 +140,7 @@
               ></i></a>
           </div>
         </div>
-        <div class="card w-25 mt-5 mb-5 me-4">
+        <div class="card w-25 mt-5 mb-5 me-4 col-lg-4 col-md-6 ">
           <img src="../assets/img/risu.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title fw-bold text-center">Aristu Chahya</h5>
@@ -148,17 +149,18 @@
         </div>
       </div>
     </div>
+    </div>
 
-    <div class="d-flex flex-column align-items-center mt-5">
+    <div class=" container d-flex flex-column align-items-center mt-5">
       <h1 class="fw-bold mb-4">My Project</h1>
 
-      <div class="d-flex flex-row flex-wrap gap-4">
+      <div class="d-flex justify-content-center flex-row flex-wrap gap-4 row">
 
         {{#each projects}}
-          <div class="card shadow" style="width: 350px">
-
+          
+          <div class="card shadow col-lg-4 col-md-6" style="width: 350px">
             <img
-              src="{{image}}"
+              src="../uploads/{{image}}"
               class="card-img-top p-3"
               alt="..."
               style="border-radius: 25px; width: 100%; "
@@ -170,6 +172,8 @@
               <p class="card-text">
                 {{description}}
               </p>
+              <p class="card-text fw-semibold text-end mb-1"> -{{User.name}}</p>
+              <p class="card-text fw-light text-end">{{updatedAt}}</p>
               <p class="card-text text-end"><a
                   href="/detail/{{id}}"
                   class="text-decoration-none"
@@ -181,7 +185,7 @@
                 <i class="fa-brands fa-java"></i>
               </div>
 
-              {{!-- {{#unless isLogin}} --}}
+              {{#if ../isLogin}}
               <div class="d-flex mt-4 gap-5">
                 <div>
                   <a
@@ -201,10 +205,10 @@
                   </button>
                 </form>
               </div>
-
-              {{!-- {{/unless}} --}}
+              {{/if}}
             </div>
           </div>
+          
         {{/each}}
       </div>
     </div>

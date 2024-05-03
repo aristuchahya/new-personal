@@ -65,7 +65,7 @@
 
     <div class="d-flex flex-column mx-auto mt-5" style="width: 500px">
       <h1 class="fw-bold mb-4 mx-auto">Edit Project</h1>
-      <form method="POST" action="/edit">
+      <form method="POST" action="/edit" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{data.id}}" />
         <div class="mb-3">
           <label for="" class="form-label fw-semibold">Project Name</label>

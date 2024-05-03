@@ -26,50 +26,97 @@ function calculateDuration(startDate, endDate) {
   }
 }
 
-const allProject = async (req, res) => {
-  // const query = "SELECT * FROM Projects";
-  // const projects = await sequelize.query(query, { type: QueryTypes.SELECT });
+const limitSentences = (sentence, limit) => {
+  const words = sentence.split(" ");
+  if (words.length <= limit) {
+    return sentence;
+  } else {
+    const truncatedWord = words.slice(0, limit);
+    return truncatedWord.join(" ") + "...";
+  }
+};
 
-  const projects = await Project.findAll();
+const allProject = async (req, res) => {
+  // const query = `SELECT * FROM "Projects"`;
+  // const projects = await sequelize.query(query, { type: QueryTypes.SELECT });
+  // console.log("all data", projects);
+  // const query = `SELECT public.Projects.id, public.Projects.title , public.Projects.startDate , public.Projects.endDate , public.Projects.technology,public.Projects.description, public.Projects.image, public.Projects.createdAt, public.Users.name  FROM public.Users JOIN public.Projects ON public.Users.id  = public.Projects.userId;`;
+
+  const formatDate = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
+
+  const projects = await Project.findAll({
+    include: { model: User, attributes: ["name"] },
+    attributes: [
+      "id",
+      "title",
+      "startDate",
+      "endDate",
+      "technology",
+      "description",
+      "image",
+      "updatedAt",
+    ],
+  });
+
+  const formattedProjects = projects.map((project) => {
+    return {
+      ...project.dataValues,
+      description: limitSentences(project.dataValues.description, 10),
+      updatedAt: formatDate(project.dataValues.updatedAt),
+    };
+  });
+  console.log("list project:", projects);
 
   const isLogin = req.session.isLogin;
   const user = req.session.user;
 
-  console.log("isLogin :", isLogin);
-  console.log("user :", user);
-
-  res.render("index", { projects, isLogin, user });
+  res.render("index", { projects: formattedProjects, isLogin, user });
 };
 
 const findProject = async (req, res) => {
-  try {
-    const { id } = req.params;
-    // const query = `SELECT * FROM Projects WHERE id = ${id}`;
-    // const data = await sequelize.query(query, { type: QueryTypes.SELECT });
-    const data = await Project.findOne({ where: { id } });
-    const technoArray = data.technology.split(",");
+  const { id } = req.params;
+  const formatDate = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
+  // const query = `SELECT * FROM Projects WHERE id = ${id}`;
+  // const data = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-    res.render("blog-detail", {
-      data: {
-        ...data.dataValues,
+  const data = await Project.findOne({
+    where: { id },
+    include: [{ model: User, attributes: ["name"] }],
+  });
+  const technoArray = data.technology.split(",");
+  const formattedDate = {
+    ...data.dataValues,
+    startDate: formatDate(data.dataValues.startDate),
+    endDate: formatDate(data.dataValues.endDate),
+  };
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
 
-        technology: technoArray,
-      },
-    });
+  res.render("blog-detail", {
+    data: {
+      ...formattedDate,
 
-    console.log("project by id", data);
-  } catch (error) {
-    console.log(error, "Data Not Found");
-  }
+      technology: technoArray,
+    },
+    isLogin,
+    user,
+  });
+
+  console.log("project by id", data);
 };
 
 const addProject = async (req, res) => {
   const { title, startDate, endDate, technology, description } = req.body;
+  const image = req.file.filename;
+  console.log("image", image);
   const formatTechno = technology.join(",");
   const duration = calculateDuration(startDate, endDate);
-  // const query = `INSERT INTO Projects (title,startDate,endDate,duration,technology,description) VALUES ('${title}','${startDate}','${endDate}','${duration}','${formatTechno}','${description}');`;
-  // const data = await sequelize.query(query, { type: QueryTypes.INSERT});
 
+  const userId = req.session.user.id;
   const data = await Project.create({
     title,
     startDate,
@@ -77,13 +124,15 @@ const addProject = async (req, res) => {
     duration,
     technology: formatTechno,
     description,
-    image:
-      "https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image,
+    userId,
   });
 
   res.redirect("/");
   console.log("input data", data);
 };
+// const query = `INSERT INTO Projects (title,startDate,endDate,duration,technology,description) VALUES ('${title}','${startDate}','${endDate}','${duration}','${formatTechno}','${description}');`;
+// const data = await sequelize.query(query, { type: QueryTypes.INSERT});
 
 const deleteProject = async (req, res) => {
   try {
@@ -98,6 +147,8 @@ const deleteProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
   const { title, startDate, endDate, technology, description, id } = req.body;
+  const image = req.file.filename;
+  const userId = req.session.user.id;
 
   const technoFormat = technology.join(",");
   const duration = calculateDuration(startDate, endDate);
@@ -111,6 +162,8 @@ const updateProject = async (req, res) => {
       technology: technoFormat,
       description,
       duration,
+      image,
+      userId,
     },
     { where: { id } }
   );
@@ -144,19 +197,20 @@ const login = async (req, res) => {
   const user = await User.findOne({ where: { email } });
 
   if (!user) {
-    req.flash("danger", "Email not found");
+    req.flash("danger", "Email or Password wrong");
     return res.redirect("/login");
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
 
   if (!validPassword) {
-    req.flash("danger", "Password wrong");
+    req.flash("danger", "Email or Password wrong");
     return res.redirect("/login");
   }
 
   req.session.isLogin = true;
   req.session.user = {
+    id: user.id,
     name: user.name,
     email: user.email,
   };
@@ -187,7 +241,9 @@ const editView = async (req, res) => {
 };
 
 const project = (req, res) => {
-  res.render("project");
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
+  res.render("project", { isLogin, user });
 };
 
 const contact = (req, res) => {
@@ -195,7 +251,9 @@ const contact = (req, res) => {
 };
 
 const testimonials = (req, res) => {
-  res.render("testimonials");
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
+  res.render("testimonials", { isLogin, user });
 };
 
 const registerView = (req, res) => {

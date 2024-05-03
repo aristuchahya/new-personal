@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Project.belongsTo(models.User, { foreignKey: "userId" });
     }
   }
   Project.init(
@@ -18,8 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       endDate: DataTypes.DATEONLY,
       technology: DataTypes.STRING,
       duration: DataTypes.STRING,
-      description: DataTypes.STRING,
+      description: DataTypes.TEXT,
       image: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
