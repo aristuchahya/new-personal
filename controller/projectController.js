@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 
 const { Project } = require("../models");
 const { User } = require("../models");
+const { Testimonial } = require("../models");
 
 function calculateDuration(startDate, endDate) {
   const startMoment = moment(startDate);
@@ -247,13 +248,18 @@ const project = (req, res) => {
 };
 
 const contact = (req, res) => {
-  res.render("contact");
-};
-
-const testimonials = (req, res) => {
   const isLogin = req.session.isLogin;
   const user = req.session.user;
-  res.render("testimonials", { isLogin, user });
+  res.render("contact", { isLogin, user });
+};
+
+const testimonials = async (req, res) => {
+  const query = `SELECT * FROM "Testimonials"`;
+  const testi = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
+  res.render("testimonials", { testi, isLogin, user });
 };
 
 const registerView = (req, res) => {

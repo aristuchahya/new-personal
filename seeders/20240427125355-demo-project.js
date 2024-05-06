@@ -3,14 +3,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("Projects", [
+    return queryInterface.bulkInsert("Testimonials", [
       {
-        title: "Aplikasi Web",
-        startDate: "28-04-2024",
-        endDate: "05-05-2024",
-        technology: "React JS",
-        duration: "7 Days",
-        description: "Learning about React JS",
+        author: "Huda",
+        message: "28-04-2024",
+        rating: "05-05-2024",
         image:
           "https://images.pexels.com/photos/15899541/pexels-photo-15899541/free-photo-of-laptop-laki-laki-pria-lelaki.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         createdAt: new Date(),

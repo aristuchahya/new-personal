@@ -22,7 +22,7 @@ const {
   register,
   login,
   logout,
-  findUserProject,
+  
 } = require("../controller/projectController");
 
 router.use(

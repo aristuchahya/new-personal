@@ -86,54 +86,67 @@
         <button
           class="btn btn-secondary text-black px-4 rounded-3"
           style="background-color: #e3e7eb"
+          onclick="allTestimonial()"
+        >
+          Rating All 
+        </button>
+        <button
+          class="btn btn-secondary text-black px-4 rounded-3"
+          style="background-color: #e3e7eb"
+          onclick="filterTestimonial(1)"
         >
           1 <i class="fa-solid fa-star ms-1"></i>
         </button>
         <button
           class="btn btn-secondary text-black px-4 rounded-3"
           style="background-color: #e3e7eb"
+          onclick="filterTestimonial(2)"
         >
           2 <i class="fa-solid fa-star ms-1"></i>
         </button>
         <button
           class="btn btn-secondary text-black px-4 rounded-3"
           style="background-color: #e3e7eb"
+          onclick="filterTestimonial(3)"
         >
           3 <i class="fa-solid fa-star ms-1"></i>
         </button>
         <button
           class="btn btn-secondary text-black px-4 rounded-3"
           style="background-color: #e3e7eb"
+          onclick="filterTestimonial(4)"
         >
           4 <i class="fa-solid fa-star ms-1"></i>
         </button>
         <button
           class="btn btn-secondary text-black px-4 rounded-3"
           style="background-color: #e3e7eb"
+          onclick="filterTestimonial(5)"
         >
           5 <i class="fa-solid fa-star ms-1"></i>
         </button>
       </div>
 
-      <div class="d-flex gap-4 flex-wrap ">
-        <div class="d-flex flex-column align-items-center mt-5">
-          <div class="card shadow" style="width: 350px">
+      <div class=" d-flex gap-4 flex-wrap ">
+        <div class="d-flex gap-3 flex-row align-items-center mt-5 row" id="testi">
+        {{#each testi}}
+          <div class="card shadow col-lg-4 col-md-6" style="width: 350px">
             <img
-              src="../assets/img/shoesoct7.jpg"
+              src="{{this.image}}"
               class="card-img-top p-3"
               alt="..."
               style="border-radius: 25px"
             />
             <div class="card-body">
-              <p class="card-text fw-normal"><i>"Mantap sekali jasanya"</i></p>
+              <p class="card-text fw-normal"><i>"{{this.message}}"</i></p>
               <p class="card-text fw-semibold text-end">
-                - Aristu Chahya
+                - {{this.author}}
               </p>
-              <p class="card-text text-end">4<i class="fa-regular fa-star text-warning"></i></p>
+              <p class="card-text text-end">{{this.rating}}<i class="fa-regular fa-star text-warning"></i></p>
             </div>
           </div>
+        {{/each}}
         </div>
-        
       </div>
 
     <script
